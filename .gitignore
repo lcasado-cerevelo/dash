@@ -1,0 +1,29 @@
+# Secretos y configuración local del servidor
+.env
+.env.*
+!.env.example
+
+# Dependencias (se instalan con composer install / npm install)
+/vendor
+/node_modules
+
+# Logs, cachés y archivos generados en ejecución
+/error_log
+error_log
+/bootstrap/cache/*.php
+/storage/debugbar
+/storage/*.key
+.phpunit.result.cache
+
+# Adjuntos de clientes subidos a los tickets (datos reales, no van al repositorio)
+/uploads/helpdesk/
+
+# Respaldos y descargas sueltas
+/*.zip
+*.log
+
+# Editores y sistema
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

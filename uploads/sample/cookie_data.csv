@@ -1,0 +1,44 @@
+IP,Date,Time,Accepted-cookies,Device type,Browser anguage,Browser name,OS Name,Country,Region,RegionName,City,Zipcode,Lat,Lon
+49.36.83.154,2023-06-10,11:24:47 UTC,necessary,desktop,en,Chrome,Linux,India,GJ,Gujarat,Surat,395007,21.1888,72.8293
+38.50.70.33,2025-09-11,06:47:33 UTC,necessary,desktop,en,Firefox,Windows,United States,FL,Florida,Miami,33132,25.7824,-80.1931
+38.50.92.203,2025-09-17,08:14:24 UTC,necessary,mobile,en,Chrome,Android,United States,FL,Florida,Miami,33132,25.7824,-80.1931
+38.50.66.184,2025-09-21,22:56:26 UTC,necessary,desktop,en,Opera,Windows,Puerto Rico,,Añasco,Las Marias,,18.2933,-67.1463
+64.247.164.161,2025-10-01,16:48:42 UTC,necessary,desktop,en,Edge,Windows,Puerto Rico,,Guaynabo,Guaynabo,,18.3575,-66.111
+207.150.251.130,2025-10-16,15:08:42 UTC,necessary,desktop,en,Edge,Windows,Puerto Rico,,San Juan,San Juan,00901,18.4671,-66.1185
+38.50.70.92,2025-10-18,04:05:16 UTC,necessary,desktop,en,Edge,Windows,United States,FL,Florida,Miami,33132,25.7824,-80.1931
+38.50.70.92,2025-10-21,08:25:58 UTC,necessary,desktop,en,Firefox,Windows,United States,FL,Florida,Miami,33132,25.7824,-80.1931
+24.50.205.0,2025-10-26,00:58:53 UTC,necessary,desktop,en,Firefox,Windows,Puerto Rico,,Caguas,Caguas,,18.2341,-66.0485
+64.247.164.161,2025-11-12,15:43:33 UTC,necessary,tablet,en,Chrome,Android,Puerto Rico,,Guaynabo,Guaynabo,,18.3575,-66.111
+38.50.94.202,2026-02-02,03:32:00 UTC,necessary,desktop,en,Chrome,Windows,Puerto Rico,,Guaynabo,Guaynabo,,18.3575,-66.111
+38.50.94.202,2026-02-03,21:42:29 UTC,necessary,desktop,en,Chrome,Windows,Puerto Rico,,Guaynabo,Guaynabo,,18.3575,-66.111
+38.50.64.46,2026-02-11,15:29:53 UTC,necessary,desktop,en,Chrome,Windows,Puerto Rico,,Utuado,Utuado,,18.2655,-66.7004
+38.50.67.253,2026-02-16,16:56:45 UTC,necessary,desktop,en,Chrome,Windows,Puerto Rico,,Toa Baja,Sabana Seca,,18.4269,-66.1846
+38.50.67.253,2026-02-16,18:07:22 UTC,necessary,desktop,en,Firefox,Windows,Puerto Rico,,Toa Baja,Sabana Seca,,18.4269,-66.1846
+38.50.92.87,2026-03-09,17:04:17 UTC,necessary,desktop,en,Chrome,Windows,United States,FL,Florida,Miami,33132,25.7824,-80.1931
+38.50.92.87,2026-03-24,05:00:35 UTC,necessary,desktop,en,Opera,Windows,United States,FL,Florida,Miami,33132,25.7824,-80.1931
+162.220.103.222,2026-03-24,07:56:18 UTC,necessary,mobile,en,Chrome,Android,Puerto Rico,,Ponce,Ponce,,18.0103,-66.624
+64.247.164.161,2026-03-24,15:16:42 UTC,necessary,desktop,en,Edge,Windows,Puerto Rico,,Guaynabo,Guaynabo,,18.3575,-66.111
+172.59.17.234,2026-03-26,21:45:33 UTC,necessary,desktop,en,Chrome,Windows,Puerto Rico,,Cabo Rojo,Puerto Real,,18.075,-67.1871
+38.50.92.87,2026-03-31,03:45:59 UTC,necessary,desktop,en,Edge,Windows,United States,FL,Florida,Miami,33132,25.7824,-80.1931
+24.42.44.25,2026-04-06,18:44:46 UTC,necessary,mobile,es,Safari,iOS,Puerto Rico,,Corozal,Corozal,,18.3411,-66.3168
+64.247.164.161,2026-04-07,10:25:26 UTC,necessary,desktop,en,Chrome,Windows,Puerto Rico,,Guaynabo,Guaynabo,,18.3575,-66.111
+64.247.164.161,2026-04-07,10:53:24 UTC,necessary,desktop,en,Edge,Windows,Puerto Rico,,Guaynabo,Guaynabo,,18.3575,-66.111
+64.247.164.161,2026-04-07,10:54:19 UTC,necessary,desktop,en,Edge,Windows,Puerto Rico,,Guaynabo,Guaynabo,,18.3575,-66.111
+64.247.164.161,2026-04-07,10:56:40 UTC,necessary,mobile,en,Edge,iOS,Puerto Rico,,Guaynabo,Guaynabo,,18.3575,-66.111
+64.247.164.161,2026-04-07,11:02:58 UTC,necessary,mobile,en,Safari,iOS,Puerto Rico,,Guaynabo,Guaynabo,,18.3575,-66.111
+64.247.164.161,2026-04-07,12:33:35 UTC,necessary,desktop,en,Edge,Windows,Puerto Rico,,Guaynabo,Guaynabo,,18.3575,-66.111
+24.41.236.252,2026-04-09,11:18:29 UTC,necessary,desktop,en,Chrome,Windows,Puerto Rico,,Toa Baja,Levittown,,18.4499,-66.1816
+181.129.120.26,2026-04-09,15:46:08 UTC,necessary,mobile,en,Safari,iOS,Colombia,ANT,Antioquia,Medellín,050001,6.2529,-75.5646
+24.50.205.48,2026-04-13,13:36:45 UTC,necessary,desktop,en,Edge,Windows,Puerto Rico,,Gurabo,Gurabo,,18.2544,-65.9729
+64.247.164.161,2026-04-16,13:37:18 UTC,necessary,desktop,en,Edge,Windows,Puerto Rico,,Guaynabo,Guaynabo,,18.3575,-66.111
+64.247.164.161,2026-04-21,12:04:11 UTC,necessary,desktop,en,Chrome,Windows,Puerto Rico,,Guaynabo,Guaynabo,,18.3575,-66.111
+64.247.164.161,2026-04-28,08:51:40 UTC,necessary,desktop,en,Edge,Windows,Puerto Rico,,Guaynabo,Guaynabo,,18.3575,-66.111
+24.50.205.48,2026-04-29,06:57:03 UTC,necessary,mobile,en,Chrome,Android,Puerto Rico,,Gurabo,Gurabo,,18.2544,-65.9729
+64.247.164.161,2026-06-22,08:01:47 UTC,necessary,desktop,en,Edge,Windows,Puerto Rico,,San Juan,San Juan,00902,18.4153,-66.0593
+64.247.164.161,2026-06-23,10:10:18 UTC,necessary,tablet,en,Chrome,Android,Puerto Rico,,San Juan,San Juan,00902,18.4153,-66.0593
+64.247.164.161,2026-07-02,12:42:58 UTC,necessary,desktop,en,Edge,Windows,Puerto Rico,,San Juan,San Juan,00902,18.4153,-66.0593
+64.247.164.161,2026-07-10,10:34:04 UTC,necessary,desktop,en,Edge,Windows,Puerto Rico,,San Juan,San Juan,00902,18.4153,-66.0593
+64.247.164.161,2026-07-21,12:25:34 UTC,necessary,desktop,en,Edge,Windows,Puerto Rico,,San Juan,San Juan,00902,18.4153,-66.0593
+54.167.99.106,2026-09-24,09:17:18 UTC,necessary,desktop,es,Chrome,Windows,United States,VA,Virginia,Ashburn,,39.04372,-77.48749
+38.50.92.145,2026-10-01,01:20:23 UTC,necessary,desktop,en,Chrome,Windows,United States,FL,Florida,Miami,33132,25.7824,-80.1931
+64.247.164.161,2026-10-08,13:51:58 UTC,necessary,desktop,en,Chrome,Windows,Puerto Rico,,Guaynabo,Guaynabo,,18.3575,-66.111
