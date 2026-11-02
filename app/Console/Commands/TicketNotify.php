@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 class TicketNotify extends Command
 {
     protected $signature = 'tickets:notify
-        {--only= : weekly | friday | reminders. Por defecto: weekly solo los lunes, friday solo los viernes y reminders todos los días}
+        {--only= : weekly | friday | reminders | escalation. Por defecto: weekly solo los lunes, friday solo los viernes; reminders y escalation todos los días}
         {--force : Ignora el candado de "el resumen semanal ya se envió hoy"}
         {--to= : Envía todo únicamente a esta dirección, sin copias (pruebas). No guarda estado}
         {--ticket=* : Limita el envío a este ticket (el número que se ve en pantalla, ej. 1042; repetible). Ignora la regla de 7 días. No guarda estado}
@@ -49,6 +49,7 @@ class TicketNotify extends Command
         $runWeekly    = $only === 'weekly' || ($only === null && now()->isMonday());
         $runFriday    = $only === 'friday' || ($only === null && now()->isFriday());
         $runReminders = $only === 'reminders' || $only === null;
+        $runEscalation = $only === 'escalation' || $only === null;
 
         if ($runWeekly) {
             if (!$this->option('force') && $persist && $state['weekly_last'] === $today) {
@@ -74,6 +75,14 @@ class TicketNotify extends Command
 
         if ($runReminders) {
             $this->validationReminders($pending, $state, $persist);
+        }
+
+        if ($runEscalation) {
+            if (!$this->option('force') && $persist && $state['escalation_last'] === $today) {
+                $this->info('El escalamiento de hoy ya se envió; se omite (use --force para repetirlo).');
+            } elseif ($this->escalation($pending) && $persist) {
+                $state['escalation_last'] = $today;
+            }
         }
 
         if ($persist) {
@@ -135,6 +144,74 @@ class TicketNotify extends Command
         return $ok;
     }
 
+    /**
+     * Escalamiento diario (tickets en Validation desde hace $escalation_days o más):
+     *  - al asignado (quien debe validar): lista con un botón por ticket;
+     *  - a quien lo envió a validar: aviso informativo, sin botón.
+     * Devuelve false si algún envío falló, para reintentar más tarde el mismo día.
+     */
+    private function escalation($pending): bool
+    {
+        $svc = $this->svc;
+
+        if (!$svc->hasTicketFilter() && !$svc->escalationActive()) {
+            $this->line('Escalamiento aún no activo (TICKET_NOTIFY_ESCALATION_FROM = ' . config('ticket_notify.escalation_from') . ').');
+            return false;
+        }
+
+        $days  = $svc->escalationDays();
+        $items = $pending->filter(fn ($i) => $svc->hasTicketFilter() || $i['days'] >= $days);
+
+        $ok = true;
+
+        // A) A quien debe validar.
+        $byAssignee = $items
+            ->filter(fn ($i) => $i['assignee'] && !empty($i['assignee']->email))
+            ->groupBy(fn ($i) => $i['assignee']->id . '|' . ((int) $i['ticket']->workspace === 5 ? 5 : 0));
+
+        foreach ($byAssignee as $group) {
+            $user = $group->first()['assignee'];
+
+            $html = view('email.ticket_escalation_assignee', [
+                'user' => $user, 'items' => $group, 'days' => $days, 'svc' => $svc,
+            ])->render();
+
+            $ok = $this->deliver(
+                'Escalamiento (validar)',
+                $user->email,
+                [],
+                'URGENTE: ' . $group->count() . ' ticket(s) llevan más de ' . $days . ' días pendientes de tu validación',
+                $html,
+                (int) $group->first()['ticket']->workspace === 5 ? 5 : null
+            ) && $ok;
+        }
+
+        // B) A quien los envió a validar (si es la misma persona que debe validar, ya recibió el anterior).
+        $byResolver = $items
+            ->filter(fn ($i) => $i['resolver'] && !empty($i['resolver']->email)
+                && (!$i['assignee'] || $i['resolver']->id !== $i['assignee']->id))
+            ->groupBy(fn ($i) => $i['resolver']->id . '|' . ((int) $i['ticket']->workspace === 5 ? 5 : 0));
+
+        foreach ($byResolver as $group) {
+            $user = $group->first()['resolver'];
+
+            $html = view('email.ticket_escalation_resolver', [
+                'user' => $user, 'items' => $group, 'days' => $days, 'svc' => $svc,
+            ])->render();
+
+            $ok = $this->deliver(
+                'Escalamiento (aviso)',
+                $user->email,
+                [],
+                $group->count() . ' ticket(s) que enviaste a validar llevan más de ' . $days . ' días sin validarse',
+                $html,
+                (int) $group->first()['ticket']->workspace === 5 ? 5 : null
+            ) && $ok;
+        }
+
+        return $ok;
+    }
+
     /** Correo 1: tickets abiertos a quien los tiene asignado, con copia a TICKET_NOTIFY_CC. */
     private function weeklyOpenTickets(): void
     {
@@ -187,6 +264,11 @@ class TicketNotify extends Command
     private function validationReminders($pending, array &$state, bool $persist): void
     {
         foreach ($pending as $item) {
+            // Pasado el umbral de escalamiento, el correo diario reemplaza al recordatorio de cada 7 días.
+            if (!$this->svc->hasTicketFilter() && $this->svc->escalationActive() && $item['days'] >= $this->svc->escalationDays()) {
+                continue;
+            }
+
             $due = $this->svc->hasTicketFilter()
                 ? ($item['assignee'] && !empty($item['assignee']->email))
                 : $this->svc->reminderIsDue($item, $state);

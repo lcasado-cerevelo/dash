@@ -230,6 +230,19 @@ class TicketNotificationService
         return $this->daysBetween(Carbon::parse($last), now()) >= $every;
     }
 
+    public function escalationDays(): int
+    {
+        return max(1, (int) config('ticket_notify.escalation_days'));
+    }
+
+    /** El escalamiento diario está activo si no hay fecha de arranque o ya llegó. */
+    public function escalationActive(): bool
+    {
+        $from = config('ticket_notify.escalation_from');
+
+        return !$from || now()->toDateString() >= Carbon::parse($from)->toDateString();
+    }
+
     public function reminderKey(array $item): string
     {
         return $item['ticket']->id . ':' . $item['audit_id'];
@@ -352,7 +365,7 @@ class TicketNotificationService
     {
         $path = $this->statePath();
         if (!is_file($path)) {
-            return ['weekly_last' => null, 'friday_last' => null, 'reminders' => []];
+            return ['weekly_last' => null, 'friday_last' => null, 'escalation_last' => null, 'reminders' => []];
         }
 
         $data = json_decode((string) file_get_contents($path), true);
@@ -360,6 +373,7 @@ class TicketNotificationService
         return [
             'weekly_last' => $data['weekly_last'] ?? null,
             'friday_last' => $data['friday_last'] ?? null,
+            'escalation_last' => $data['escalation_last'] ?? null,
             'reminders'   => is_array($data['reminders'] ?? null) ? $data['reminders'] : [],
         ];
     }

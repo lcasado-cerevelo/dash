@@ -20,6 +20,14 @@ return [
     // Días en Validation antes del primer recordatorio, y cada cuántos días se repite.
     'reminder_days' => (int) env('TICKET_NOTIFY_REMINDER_DAYS', 7),
 
+    // Escalamiento: pasados estos días en Validation, el asignado y quien lo envió a validar
+    // reciben un correo DIARIO (en vez del recordatorio cada 7 días).
+    'escalation_days' => (int) env('TICKET_NOTIFY_ESCALATION_DAYS', 14),
+
+    // Opcional (AAAA-MM-DD): no enviar escalamientos antes de esta fecha. Sirve para un arranque
+    // ordenado, porque los tickets que ya llevan semanas en Validation empezarían a escalar de inmediato.
+    'escalation_from' => env('TICKET_NOTIFY_ESCALATION_FROM'),
+
     // Vigencia en días del botón "Validar" de los recordatorios.
     'link_days' => (int) env('TICKET_NOTIFY_LINK_DAYS', 7),
 
